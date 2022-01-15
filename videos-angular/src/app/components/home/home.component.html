@@ -1,0 +1,78 @@
+<div class="col-md-12 mt-3" *ngIf="identity">
+	<h1>{{page_title}}</h1>
+	<hr>
+	<div class="card-columns">
+		<article class="card w-100" *ngFor="let video of videos">
+			<div class="card-header">
+				<h3>{{video.title}}</h3>
+			</div>
+			<div class="card-body">
+				<!-- MINIATURA-->
+				<div class="video-image w-100" *ngIf="video.url">
+					<img src="{{getThumb(video.url)}}" class="w-100" />
+				</div>
+				<div class="video-image w-100" *ngIf="!video.url">
+					<img src="assets/images/video-default.jpg" class="w-100" />
+				</div>
+				<!-- BOTONES -->
+				<div class="video-buttons mt-3">
+					<a [routerLink]="['/video',video.id]" class="btn btn-success mr-2">Leer</a>
+					<a [routerLink]="['/editar-favorito',video.id]" class="btn btn-warning mr-2">Editar</a>
+					
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]="'#borrar'+video.id">
+					  Borrar
+					</button>
+
+					<!-- Modal -->
+					<div class="modal fade" id="{{'borrar'+video.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="exampleModalLabel">¿Seguro que quieres borrar este video?</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					        Vas a borrar para siempre el video: {{ video.title}}
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+					        <button type="button" class="btn btn-danger" (click)="deleteVideo(video.id)" data-dismiss="modal">Borrar</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+				</div>
+				
+			</div>
+
+		</article>
+	</div>
+	<nav aria-label="Page navigation example">
+	  <ul class="pagination">
+	    <li class="page-item"><a class="page-link" [routerLink]="['/inicio',prev_page]">Previous</a></li>
+	    <li class="page-item" *ngFor="let num of number_pages">
+	    	<a class="page-link" [routerLink]="['/inicio',num]">{{num}}</a>
+	    </li>
+	    
+	    <li class="page-item"><a class="page-link" [routerLink]="['/inicio',next_page]">Next</a></li>
+	  </ul>
+	</nav>
+
+
+
+</div>
+<div class="col-md-12 mt-3" *ngIf="!identity">
+	<div class="jumbotron">
+	  <h1 class="display-4">Bienvenido a Favovideos</h1>
+	  <p class="lead">Registrate en la web para guardar tus videos favoritos de youtube y poder verlos cuando quieras</p>
+	  <hr class="my-4">
+	  
+	  <p class="lead">
+	    <a class="btn btn-primary btn-lg" [routerLink]="['/login']" role="button">Identificate</a>
+	    <a class="btn btn-success btn-lg ml-3" [routerLink]="['/registro']" role="button">Registrate</a>
+	  </p>
+	</div>
+</div>

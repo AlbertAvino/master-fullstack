@@ -1,0 +1,57 @@
+<div class="card-columns">
+		<article class="card w-100" *ngFor="let post of posts"> 
+			<div class="card-header">
+				<h3>
+					<a [routerLink]="['/entrada' , post.id]">		{{post.title}}
+					</a>
+				</h3>
+			</div>
+			<div class="card-body">
+				<!--imagen-->
+				<div class="post-image w-100" *ngIf="post.image">
+					<img src="{{ url + 'post/image/' + post.image }}" class="w-100">
+				</div>
+				<div class="post-image w-100" *ngIf="!post.image">
+					<img src="assets/images/descarga.png" class="w-100">
+				</div>
+
+				<!--botones de acción-->
+				<div class="post-buttons mt-3">
+					<a [routerLink]="['/entrada' , post.id]" class="btn btn-success mr-2">Leer</a>
+					<span *ngIf="identity && identity.sub == post.user_id">
+						<a [routerLink]="['/editar-entrada', post.id]" class="btn btn-warning mr-2">Editar</a>
+						
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#myModal'+post.id">
+						  Borrar
+						</button>
+
+						<!-- Modal -->
+						<div class="modal fade" id="{{'myModal'+post.id}}" >
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">¿Seguro quieres borrar esta entrada?</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						        Vas a borrar definitivamente {{post.title}}
+						      </div>
+						      <div class="modal-footer">
+						      	<a (click)="deletePost(post.id)" class="btn btn-danger" data-dismiss="modal">Borrar</a>
+						        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>						        
+						      </div>
+						    </div>
+						  </div>
+						</div>						
+
+					</span>
+
+
+				</div>
+			</div>
+			
+		</article>
+	</div>

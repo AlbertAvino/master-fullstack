@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+.avatar_edit{
+	width: 80px;
+	margin-bottom: 10px;
+}
+.avatar_mask{
+	width: 40px;
+	height: 40px;
+	border-radius: 900px;
+	overflow: hidden;
+}
+.avatar_mask img{
+	height: 40px;
+}
+
+.avatar_mask_profile{
+	width: 90px;
+	height: 90px;
+	border-radius: 900px;
+	overflow: hidden;
+}
+
+.avatar_mask_profile img{
+	height: 90px;
+}
+
+.card-header a{
+	color: #444;
+}
+.post-image{
+	height: 200px;
+	overflow: hidden;
+}
+
+footer{
+	margin-top:50px;
+	color: lightgray;
+}
